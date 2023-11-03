@@ -14,99 +14,60 @@ int* input(int *num)
     int * a = malloc(n*sizeof(int));
     for(i = 0; i < n; i++)
     {
-        printf("a[%d] = ",i);
-        scanf("%d", &a[i]);
+      printf("a[%d] = ",i);
+      scanf("%d", &a[i]);
     }
     *num = n;
     return a;
 }
 
-void MassNum(int *a, int n)
+int* MassNum(int *a, int n)
 {
-  int maxminpos;
+  int maxminpos,maxmin;
   for (int i = 0; i < n; i++)
     {
-      int maxmin;
       if (a[i] < maxmin){
+        printf("join | ");
         maxmin = a[i];
         maxminpos = i;      
       }
     }
-  return maxminpos;
+    printf("%d | ",maxminpos);
+  return (maxminpos);
 }
 
-/*void Chng(int *a, int n, int maxminpos)
+void Chng(int *a, int n, int maxminpos)
 {
   int i;
-  int maxminpos = MassNum;
+  printf("%d <- got from MassNum ",maxminpos);
   for (i = 0; i < n; i++){
-    printf("%d",a[i]);
     for (maxminpos; maxminpos<n; maxminpos++){
       int pos = maxminpos;
       if (pos % 2 == 0){
-          a[maxminpos] = 1;
+        a[maxminpos] = 1;
       }
     }
   }
-}*/
+}
 
 void output(int *a, int n)
 {
-    int i;
-    for(i = 0; i < n; i++)
-    {
-        printf("\na[%d] = %d",i, a[i]);
-    }
+  int i;
+  for(i = 0; i < n; i++)
+  {
+    printf("\na[%d] = %d",i, a[i]);
+  }
 }
 
 int main() {
   system("cls");
-    int n;
-    int *a = input(&n);
-    printf("The smallest mass is on: ");   
-    MassNum(a,n);
-    //Chng(a,n,MassNum);
-    output(a,n);
-    free(a);
-    getch();
-    return 0;
-}
-
-
-
-/*
-int main()
-{
-  int *a;  // указатель на массив
-  int i, n, maxminpos, maxmin;
-  system("cls");
-  printf("Enter size of mass: ");
-  scanf("%d", &n);
-  // Выделение памяти
-  a = (int*)malloc(n * sizeof(int));
-  // Ввод элементов массива
-  for (i = 0; i<n; i++)
-  {
-    printf("[%d] = ", i);
-    scanf("%d", &a[i]);
-    minposit(a,n);
-    if (a[i] < maxmin){
-        maxmin = a[i];
-        maxminpos = i;      
-    }
-  }
-  
-  // Вывод элементов массива
-  for (i = 0; i < n; i++){
-    printf("%d",a[i]);
-    for (maxminpos; maxminpos<n; maxminpos++){
-      int pos = maxminpos;
-      if (pos % 2 == 0){
-          a[maxminpos] = 1;
-      }
-    }
-  }
-
+  int n;
+  int *a = input(&n);
+  printf("The smallest mass is on: ");   
+  int *b = MassNum(a,n);
+  Chng(a,n,b);
+  output(a,n);
+  free(a);
+  getch();
   return 0;
 }
-*/

@@ -6,34 +6,79 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-void minposit(int a[], int n){
-  int maxminpos, maxmin;
-  int tek = n;
-  for (int i = 0; i < n; i++){
-    if (a[i] < maxmin){
-      maxminpos = i;
+int* input(int *num)
+{
+    int i,n;
+    printf("Input number of elements: ");
+    scanf("%d",&n);
+    int * a = malloc(n*sizeof(int));
+    for(i = 0; i < n; i++)
+    {
+        printf("a[%d] = ",i);
+        scanf("%d", &a[i]);
     }
-    massvis(maxminpos, a, tek);
-  }
+    *num = n;
+    return a;
 }
 
-void massvis(int maxminpos, int a[], int n)
+void MassNum(int *a, int n)
 {
-  for (int i = 0; i < n; i++){
+  int maxminpos;
+  for (int i = 0; i < n; i++)
+    {
+      int maxmin;
+      if (a[i] < maxmin){
+        maxmin = a[i];
+        maxminpos = i;      
+      }
+    }
+  return maxminpos;
+}
+
+/*void Chng(int *a, int n, int maxminpos)
+{
+  int i;
+  int maxminpos = MassNum;
+  for (i = 0; i < n; i++){
     printf("%d",a[i]);
     for (maxminpos; maxminpos<n; maxminpos++){
       int pos = maxminpos;
       if (pos % 2 == 0){
-        a[maxminpos] = 1;
+          a[maxminpos] = 1;
       }
     }
   }
+}*/
+
+void output(int *a, int n)
+{
+    int i;
+    for(i = 0; i < n; i++)
+    {
+        printf("\na[%d] = %d",i, a[i]);
+    }
 }
 
+int main() {
+  system("cls");
+    int n;
+    int *a = input(&n);
+    printf("The smallest mass is on: ");   
+    MassNum(a,n);
+    //Chng(a,n,MassNum);
+    output(a,n);
+    free(a);
+    getch();
+    return 0;
+}
+
+
+
+/*
 int main()
 {
   int *a;  // указатель на массив
-  int i, n;
+  int i, n, maxminpos, maxmin;
   system("cls");
   printf("Enter size of mass: ");
   scanf("%d", &n);
@@ -45,14 +90,14 @@ int main()
     printf("[%d] = ", i);
     scanf("%d", &a[i]);
     minposit(a,n);
-    /*if (a[i] < maxmin){
+    if (a[i] < maxmin){
         maxmin = a[i];
         maxminpos = i;      
-    }*/
+    }
   }
   
   // Вывод элементов массива
-  /*for (i = 0; i < n; i++){
+  for (i = 0; i < n; i++){
     printf("%d",a[i]);
     for (maxminpos; maxminpos<n; maxminpos++){
       int pos = maxminpos;
@@ -60,8 +105,8 @@ int main()
           a[maxminpos] = 1;
       }
     }
-  }*/
+  }
 
-  massvis;
   return 0;
 }
+*/

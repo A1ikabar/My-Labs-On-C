@@ -12,6 +12,8 @@ int* input(int *num)
     printf("Input number of elements: ");
     scanf("%d",&n);
     int * a = malloc(n*sizeof(int));
+    if (a==NULL) 
+    printf ("The required memory is not allocated!");
     for(i = 0; i < n; i++)
     {
       printf("a[%d] = ",i);
@@ -27,7 +29,7 @@ int* MassNum(int *a, int n)
   for (int i = 0; i < n; i++)
     {
       if (a[i] < maxmin){
-        printf("join | ");
+        printf("Join | ");
         maxmin = a[i];
         maxminpos = i;      
       }
@@ -39,7 +41,7 @@ int* MassNum(int *a, int n)
 void Chng(int *a, int n, int maxminpos)
 {
   int i;
-  printf("%d <- got from MassNum ",maxminpos);
+  printf("%d <- Got from MassNum ",maxminpos);
   for (i = 0; i < n; i++){
     for (maxminpos; maxminpos<n; maxminpos++){
       int pos = maxminpos;
@@ -63,7 +65,7 @@ int main() {
   system("cls");
   int n;
   int *a = input(&n);
-  printf("The smallest mass is on: ");   
+  printf("Least mass is on: ");   
   int *b = MassNum(a,n);
   Chng(a,n,b);
   output(a,n);

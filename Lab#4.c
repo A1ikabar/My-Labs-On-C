@@ -90,7 +90,7 @@ void writeCountriesToFile(const Country* nations, int size) {
 }
 
 //Функция для вывода информации об странах, чья площадь меньше средней площади всех стран
-void printCountriesBySquare(const Country* nations, int size, float averageArea) {
+void printCountriesBySquare(const Country* nations, int size, double averageArea) {
     int totalArea = 0;
 	setlocale(LC_ALL,""); 
     printf("\nCountry information %s:\n");
@@ -105,8 +105,8 @@ void printCountriesBySquare(const Country* nations, int size, float averageArea)
 int main() {
     system ("cls");
 	setlocale(LC_ALL,""); 
-    int size = 5;
-    float totalArea;
+    int size = 2;
+    double totalArea;
 
     // Выделение памяти для массива структур
     Country* nations = (Country*)malloc(size * sizeof(Country));
@@ -136,7 +136,7 @@ int main() {
         printf("nations[i].square %d\n", nations[i].square);
         printf("totalArea: %d\n", totalArea);
     }
-    float averageArea = totalArea / size;
+    double averageArea = totalArea / size;
     printCountriesBySquare(nations, size, averageArea);
 
     // Освобождение выделенной памяти

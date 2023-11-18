@@ -17,8 +17,6 @@ int i;
 и заполняет поля структуры country значениями, введенными пользователем*/
 void fillCountryData(Country* nation) {
 
-    double totalsquare;
-
 	setlocale(LC_ALL,""); 
 	
 	// -> выбор элемента по указателю (позволяет получать доступ к элементам в структурах и объединениях)
@@ -36,38 +34,6 @@ void fillCountryData(Country* nation) {
     
     printf("Enter the area of country: ");
     scanf("%d", &nation->square);
-}
-
-
-//Функция, котрая выводит информацию о стране на экран
-void printCountry(const Country* nation) {
-	setlocale(LC_ALL,""); 
-    printf("The name of the country: %s\n", nation->country);
-    printf("The capital of country: %s\n", nation->capital);
-    printf("Official language: %s\n", nation->language);
-    printf("Currency unit: %s\n", nation->money);
-    printf("Country area: %d\n", nation->square);
-}
-
-
-/*Функция, которая считывает информацию о странах из файла "countries.txt"
-и сохраняет ее в массиве структур nations*/
-void readCountriesFromFile(Country* nations, int size) {
-	setlocale(LC_ALL,""); 
-    FILE* file = fopen("countries.txt", "r");
-    if (file == NULL) {
-        printf("Failed to open file!\n");
-        return;
-    }
-    
-    for (i = 0; i < size; i++) {
-        fscanf(file, "%s", nations[i].country);
-        fscanf(file, "%s", nations[i].capital);
-        fscanf(file, "%s", nations[i].language);
-        fscanf(file, "%s", nations[i].money);
-        fscanf(file, "%d", &nations[i].square);
-    }
-    fclose(file);
 }
 
 //Функция, которая записывает информацию о странах из массива структур nations в файл "countries.txt" 
@@ -89,18 +55,47 @@ void writeCountriesToFile(const Country* nations, int size) {
     fclose(file);
 }
 
+/*Функция, которая считывает информацию о странах из файла "countries.txt"
+и сохраняет ее в массиве структур nations*/
+void readCountriesFromFile(Country* nations, int size) {
+	setlocale(LC_ALL,""); 
+    FILE* file = fopen("countries.txt", "r");
+    if (file == NULL) {
+        printf("Failed to open file!\n");
+        return;
+    }
+    
+    for (i = 0; i < size; i++) {
+        fscanf(file, "%s", nations[i].country);
+        fscanf(file, "%s", nations[i].capital);
+        fscanf(file, "%s", nations[i].language);
+        fscanf(file, "%s", nations[i].money);
+        fscanf(file, "%d", &nations[i].square);
+    }
+    fclose(file);
+}
+
 //Функция для вывода информации об странах, чья площадь меньше средней площади всех стран
 void printCountriesBySquare(const Country* nations, int size, double averageArea) {
-    int totalArea = 0;
 	setlocale(LC_ALL,""); 
     printf("\nCountry information %s:\n");
-    printf("averageArea: %d\n", averageArea);
     for (i = 0; i < size; i++){																																			 
         if (nations[i].square < averageArea) {
             printCountry(&nations[i]);           
         }
     }
 }
+
+//Функция, котрая выводит информацию о стране на экран
+void printCountry(const Country* nation) {
+	setlocale(LC_ALL,""); 
+    printf("The name of the country: %s\n", nation->country);
+    printf("The capital of country: %s\n", nation->capital);
+    printf("Official language: %s\n", nation->language);
+    printf("Currency unit: %s\n", nation->money);
+    printf("Country area: %d\n", nation->square);
+}
+
 
 int main() {
     system ("cls");
@@ -120,6 +115,7 @@ int main() {
     
     if (choice == 1) { // чтение из файла
         readCountriesFromFile(nations, size);
+
     } else if (choice == 2) { //ввод с клавиатуры
         for (i = 0; i < size; i++) {
             printf("\nEnter country details %d:\n", i + 1);
@@ -137,6 +133,7 @@ int main() {
         printf("totalArea: %d\n", totalArea);
     }
     double averageArea = totalArea / size;
+    printf("averageArea: %d\n", averageArea);
     printCountriesBySquare(nations, size, averageArea);
 
     // Освобождение выделенной памяти

@@ -33,7 +33,7 @@ void fillCountryData(Country* nation) {
     scanf("%s", nation->money);
     
     printf("Enter the area of country: ");
-    scanf("%d", &nation->square);
+    scanf("%lf", &nation->square);
 }
 
 //Функция, которая записывает информацию о странах из массива структур nations в файл "countries.txt" 
@@ -50,7 +50,7 @@ void writeCountriesToFile(const Country* nations, int size) {
         fprintf(file, "%s ", nations[i].capital);
         fprintf(file, "%s ", nations[i].language);
         fprintf(file, "%s ", nations[i].money);
-        fprintf(file, "%d ", nations[i].square);
+        fprintf(file, "%lf ", nations[i].square);
     }
     fclose(file);
 }
@@ -70,7 +70,7 @@ void readCountriesFromFile(Country* nations, int size) {
         fscanf(file, "%s", nations[i].capital);
         fscanf(file, "%s", nations[i].language);
         fscanf(file, "%s", nations[i].money);
-        fscanf(file, "%d", &nations[i].square);
+        fscanf(file, "%lf", &nations[i].square);
     }
     fclose(file);
 }
@@ -93,14 +93,14 @@ void printCountry(const Country* nation) {
     printf("The capital of country: %s\n", nation->capital);
     printf("Official language: %s\n", nation->language);
     printf("Currency unit: %s\n", nation->money);
-    printf("Country area: %d\n", nation->square);
+    printf("Country area: %lf\n", nation->square);
 }
 
 
 int main() {
     system ("cls");
 	setlocale(LC_ALL,""); 
-    int size = 2;
+    int size = 5;
     double totalArea;
 
     // Выделение памяти для массива структур
@@ -129,11 +129,8 @@ int main() {
     
     for (i = 0; i < size; i++){
         totalArea += nations[i].square;
-        printf("nations[i].square %d\n", nations[i].square);
-        printf("totalArea: %d\n", totalArea);
     }
     double averageArea = totalArea / size;
-    printf("averageArea: %d\n", averageArea);
     printCountriesBySquare(nations, size, averageArea);
 
     // Освобождение выделенной памяти

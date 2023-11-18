@@ -51,7 +51,7 @@ void printCountry(const Country* nation) {
 
 
 /*Функция, которая считывает информацию о странах из файла "countries.txt"
-и сохраняет ее в массиве структур countries*/
+и сохраняет ее в массиве структур nations*/
 void readCountriesFromFile(Country* nations, int size) {
 	setlocale(LC_ALL,""); 
     FILE* file = fopen("countries.txt", "r");
